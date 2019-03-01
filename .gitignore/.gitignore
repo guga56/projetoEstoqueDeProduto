@@ -1,0 +1,119 @@
+package cadprodutos.cursoandroid.com.controledeestoquedeproduto.entity;
+
+import java.io.Serializable;
+
+public class Produto implements Serializable {
+
+    private String id;
+    private String dataCadastro;
+    private String nome;
+    private int qtdecompra;
+    private Double precocompra;
+    private Double totalcompra;
+    private Double precovenda;
+    private int qtdevenda;
+    private Double totalvenda;
+    private Double totalGeral;
+
+    public Produto(){
+
+    }
+
+    public Produto(String id, String dataCadastro, String nome, int qtdecompra, Double precocompra, Double totalcompra, Double precovenda, int qtdevenda, Double totalvenda, Double totalGeral) {
+        this.id = id;
+        this.dataCadastro = dataCadastro;
+        this.nome = nome;
+        this.qtdecompra = qtdecompra;
+        this.precocompra = precocompra;
+        this.totalcompra = totalcompra;
+        this.precovenda = precovenda;
+        this.qtdevenda = qtdevenda;
+        this.totalvenda = totalvenda;
+        this.totalGeral = totalGeral;
+    }
+
+    @Override
+    public String toString() {
+        return "id " + id + ", Data de Cadastro " + dataCadastro + ", nome " + nome + ", quantidade da compra " + qtdecompra + ", preço da compra " + precocompra + ", total da compra " + totalcompra + ", preço da venda " + precovenda  + ", quantidade da venda " + qtdevenda + ", total da venda " + totalvenda + ", Total Geral " + totalGeral;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getQtdecompra() {
+        return qtdecompra;
+    }
+
+    public void setQtdecompra(int qtdecompra) {
+        this.qtdecompra = qtdecompra;
+    }
+
+    public Double getPrecocompra() {
+        return precocompra;
+    }
+
+    public void setPrecocompra(Double precocompra) {
+        this.precocompra = precocompra;
+    }
+
+    public Double getTotalcompra() {
+        return totalcompra;
+    }
+
+    public void setTotalcompra(Double totalcompra) {
+        this.totalcompra = totalcompra;
+    }
+
+    public Double getPrecovenda() {
+        return precovenda;
+    }
+
+    public void setPrecovenda(Double precovenda) {
+        this.precovenda = precovenda;
+    }
+
+    public int getQtdevenda() {
+        return qtdevenda;
+    }
+
+    public void setQtdevenda(int qtdevenda) {
+        this.qtdevenda = qtdevenda;
+    }
+
+    public Double getTotalvenda() {
+        return totalvenda;
+    }
+
+    public void setTotalvenda(Double totalvenda) {
+        this.totalvenda = totalvenda;
+    }
+
+    public Double getTotalGeral() {
+        return totalGeral;
+    }
+
+    public void setTotalGeral(Double totalGeral) {
+        this.totalGeral = totalGeral;
+    }
+}
