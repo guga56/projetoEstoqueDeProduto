@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelaCadastro">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_datacadastro_editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="67dp"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_nome_editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="67dp"
+                android:capitalize="words"
+                android:hint="Digite seu nome"
+                android:layout_below="@+id/et_datacadastro_editar"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_qtdecompra_editar"
+                android:hint="Digite a quantidade"
+                android:layout_below="@+id/et_nome_editar"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_precocompra_editar"
+                android:hint="Digite a preço da compra"
+                android:layout_below="@+id/et_qtdecompra_editar"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_precovenda_editar"
+                android:hint="Digite o preço da venda"
+                android:layout_below="@+id/et_precocompra_editar"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_qtdevenda_editar"
+                android:hint="Digite a quantidade da venda"
+                android:layout_below="@+id/et_precovenda_editar"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_totalcompra_editar"
+                android:layout_below="@+id/et_precovenda_editar"
+                android:layout_alignParentStart="true"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_totalvenda_editar"
+                android:layout_below="@+id/et_precocompra_editar"
+                android:layout_alignParentStart="true"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_totalgeral_editar"
+                android:layout_below="@+id/et_precocompra_editar"
+                android:layout_alignParentStart="true"/>
+
+            <Button
+                android:text="@string/calculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="79dp"
+                android:id="@+id/bt_calculo"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="@string/calculovenda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="79dp"
+                android:id="@+id/bt_calculovenda"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="@string/calculototal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="79dp"
+                android:id="@+id/bt_calculototal"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="@string/edprod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="79dp"
+                android:id="@+id/bt_editar"
+                android:layout_alignParentEnd="true" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
