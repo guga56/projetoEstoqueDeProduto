@@ -1,0 +1,126 @@
+package cadprodutos.cursoandroid.com.controledeestoquedeproduto;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Date;
+
+import cadprodutos.cursoandroid.com.controledeestoquedeproduto.dao.ProdutoDAO;
+import cadprodutos.cursoandroid.com.controledeestoquedeproduto.entity.Produto;
+
+public class TelaEditar extends AppCompatActivity {
+
+    private EditText etDatacadastro, etNome, etQtdecompra, etPrecocompra, etTotalcompra, etPrecovenda, etQtdevenda, etTotalvenda, etTotalGeral;
+    private Button btCalculo, btCalculovenda, btTotalGeral, bteditarprod;
+    private double preco, qtde, total;
+    private double precovenda, qtdevenda, totalvenda;
+    private double totalGeral, totalv, totalcompra;
+    private Produto produto;
+    private ProdutoDAO produtoDAO;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tela_editar);
+
+        this.inicializaComponentes();
+
+        etPrecocompra = (EditText) findViewById(R.id.et_precocompra_editar);
+        etQtdecompra = (EditText) findViewById(R.id.et_qtdecompra_editar);
+
+        btCalculo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preco = Double.parseDouble(etPrecocompra.getText().toString());
+                qtde = Integer.parseInt(etQtdecompra.getText().toString());
+
+                total=preco*qtde;
+
+                etTotalcompra.setText(String.valueOf(total));
+
+            }
+        });
+
+        etQtdevenda = (EditText) findViewById(R.id.et_qtdecompra_editar);
+        etPrecovenda = (EditText) findViewById(R.id.et_precovenda_editar);
+
+        btCalculovenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                precovenda = Double.parseDouble(etPrecovenda.getText().toString());
+                qtdevenda = Integer.parseInt(etQtdevenda.getText().toString());
+
+                totalvenda=precovenda*qtdevenda;
+
+                etTotalvenda.setText(String.valueOf(totalvenda));
+            }
+        });
+
+        etTotalcompra = (EditText) findViewById(R.id.et_totalcompra_editar);
+        etTotalvenda = (EditText) findViewById(R.id.et_totalvenda_editar);
+
+        btTotalGeral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                totalv = Double.parseDouble(etTotalvenda.getText().toString());
+                totalcompra = Double.parseDouble(etTotalcompra.getText().toString());
+
+                totalGeral = totalv - totalcompra;
+
+                etTotalGeral.setText(String.valueOf(totalGeral));
+            }
+        });
+
+        bteditarprod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                produto.setDataCadastro(etDatacadastro.getText().toString());
+                produto.setNome(etNome.getText().toString());
+                produto.setQtdecompra(Integer.parseInt(etQtdecompra.getText().toString()));
+                produto.setPrecovenda(Double.parseDouble(etPrecovenda.getText().toString()));
+                produto.setQtdecompra(Integer.parseInt(etQtdecompra.getText().toString()));
+                produto.setPrecocompra(Double.parseDouble(etPrecocompra.getText().toString()));
+                produto.setTotalcompra(Double.parseDouble(etTotalcompra.getText().toString()));
+                produto.setTotalvenda(Double.parseDouble(etTotalvenda.getText().toString()));
+                produto.setTotalGeral(Double.parseDouble(etTotalGeral.getText().toString()));
+
+
+
+                boolean editou = produtoDAO.editar(produto);
+
+                if(editou){
+                    Toast.makeText(TelaEditar.this,"Editado: " + produto.getNome(), Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TelaEditar.this,"Produto não Editado: " + produto.getNome(), Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+    }
+
+    public void inicializaComponentes(){
+        this.etDatacadastro = (EditText) findViewById(R.id.et_datacadastro_editar);
+        this.etNome = (EditText) findViewById(R.id.et_nome_editar);
+        this.etQtdecompra = (EditText) findViewById(R.id.et_qtdecompra_editar);
+        this.etPrecocompra = (EditText) findViewById(R.id.et_precocompra_editar);
+        this.etTotalcompra = (EditText) findViewById(R.id.et_totalcompra_editar);
+        this.etPrecovenda = (EditText) findViewById(R.id.et_precovenda_editar);
+        this.etQtdevenda = (EditText) findViewById(R.id.et_qtdevenda_editar);
+        this.etTotalvenda = (EditText) findViewById(R.id.et_totalvenda_editar);
+        this.etTotalGeral = (EditText) findViewById(R.id.et_totalgeral_editar);
+        this.btCalculo = (Button) findViewById(R.id.bt_calculo);
+        this.btCalculovenda = (Button) findViewById(R.id.bt_calculovenda);
+        this.btTotalGeral = (Button) findViewById(R.id.bt_calculototal);
+        this.bteditarprod = (Button) findViewById(R.id.bt_editar);
+        this.produto = new Produto();
+        this.produtoDAO = new ProdutoDAO(getApplication());
+    }
+
+}
