@@ -1,0 +1,124 @@
+package cadprodutos.cursoandroid.com.controledeestoquedeproduto.dao;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import cadprodutos.cursoandroid.com.controledeestoquedeproduto.entity.Produto;
+
+public class ProdutoDAO {
+
+    private SQLiteDatabase db;
+
+    public static String NOME_TABELA = "produto";
+    public static String COLUNA_ID = "id";
+    public static String COLUNA_DATACADASTRO = "datacadasro";
+    public static String COLUNA_NOME = "nome";
+    public static String COLUNA_QTDECOMPRA = "qtdecompra";
+    public static String COLUNA_PRECOCOMPRA = "precocompra";
+    public static String COLUNA_TOTALCOMPRA = "totalcompra";
+    public static String COLUNA_PRECOVENDA = "precovenda";
+    public static String COLUNA_QTDEVENDA = "qtdevenda";
+    public static String COLUNA_TOTALVENDA = "totalvenda";
+    public static String COLUNA_TOTALGERAL = "totalgeral";
+    public static String CRIAR_TABELA="CREATE TABLE "+NOME_TABELA+"("+COLUNA_ID+" INTEGER  PRIMARY KEY AUTOINCREMENT, "+COLUNA_DATACADASTRO+" DATETIME NOT NULL, "+COLUNA_NOME+" TEXT NOT NULL, "+COLUNA_QTDECOMPRA+ " TEXT  NOT NULL, "+COLUNA_PRECOCOMPRA+" TEXT NOT NULL, "+COLUNA_TOTALCOMPRA+" TEXT NOT NULL, "+COLUNA_PRECOVENDA+" TEXT NOT NULL, "+COLUNA_QTDEVENDA+" TEXT NOT NULL, "+COLUNA_TOTALVENDA+" TEXT NOT NULL, "+COLUNA_TOTALGERAL+" TEXT NOT NULL);";
+
+    public ProdutoDAO(Context ctx){
+         db = SQLHelper.getInstance(ctx).getWritableDatabase();
+    }
+
+    public boolean salvar(Produto produto){
+        long i = db.insert(NOME_TABELA, null, produtoContentValues(produto));
+
+        return true;
+    }
+
+    public boolean deletar(Produto produto){
+        String where = COLUNA_ID+ " =?";
+
+        String[] whereArgs = {
+                produto.getId().toString()
+        };
+
+        long i =  db.delete(NOME_TABELA, where, whereArgs);
+
+        return true;
+    }
+
+    public boolean editar(Produto produto){
+        String where = COLUNA_ID+ " =?";
+
+        String[] whereArgs = {
+                produto.getId().toString()
+        };
+
+        long i =  db.update(NOME_TABELA,produtoContentValues(produto), where, whereArgs);
+
+        return true;
+    }
+
+    public ArrayList<Produto> listar(){
+        ArrayList<Produto> listaContato = new ArrayList<Produto>();
+        String sql = "SELECT * FROM " + NOME_TABELA;
+        Cursor cursor = db.rawQuery(sql, null);
+
+        Produto produto;
+
+        int indiceId = cursor.getColumnIndex(COLUNA_ID);
+        int indiceDataCadastro = cursor.getColumnIndex(COLUNA_DATACADASTRO);
+        int indiceNome = cursor.getColumnIndex(COLUNA_NOME);
+        int indiceQtdecompra = cursor.getColumnIndex(COLUNA_QTDECOMPRA);
+        int indicePreccompra = cursor.getColumnIndex(COLUNA_PRECOCOMPRA);
+        int indiceTotalcompra = cursor.getColumnIndex(COLUNA_TOTALCOMPRA);
+        int indicePrecovenda = cursor.getColumnIndex(COLUNA_PRECOCOMPRA);
+        int indiceQtdevenda = cursor.getColumnIndex(COLUNA_QTDEVENDA);
+        int indiceTotalpreco = cursor.getColumnIndex(COLUNA_TOTALVENDA);
+        int indiceTotalgeral = cursor.getColumnIndex(COLUNA_TOTALGERAL);
+
+        while (cursor.moveToNext()){
+
+            produto = new Produto();
+
+            produto.setId(cursor.getString(indiceId));
+            produto.setDataCadastro(cursor.getString(indiceDataCadastro));
+            produto.setNome(cursor.getString(indiceNome));
+            produto.setQtdecompra(cursor.getInt(indiceQtdecompra));
+            produto.setPrecocompra(cursor.getDouble(indicePreccompra));
+            produto.setTotalcompra(cursor.getDouble(indiceTotalpreco));
+            produto.setPrecovenda(cursor.getDouble(indicePrecovenda));
+            produto.setQtdevenda(cursor.getInt(indiceQtdevenda));
+            produto.setTotalvenda(cursor.getDouble(indiceTotalpreco));
+            produto.setTotalGeral(cursor.getDouble(indiceTotalgeral));
+
+            listaContato.add(produto);
+        }
+
+        return listaContato;
+    }
+
+
+
+
+    public ContentValues produtoContentValues(Produto produto){
+        ContentValues cv = new ContentValues();
+        cv.put(COLUNA_DATACADASTRO, produto.getDataCadastro());
+        cv.put(COLUNA_NOME, produto.getNome());
+        cv.put(COLUNA_QTDECOMPRA, produto.getQtdecompra());
+        cv.put(COLUNA_PRECOCOMPRA, produto.getPrecocompra());
+        cv.put(COLUNA_TOTALCOMPRA, produto.getTotalcompra());
+        cv.put(COLUNA_QTDEVENDA, produto.getQtdevenda());
+        cv.put(COLUNA_PRECOVENDA, produto.getPrecovenda());
+        cv.put(COLUNA_TOTALVENDA, produto.getTotalvenda());
+        cv.put(COLUNA_TOTALGERAL, produto.getTotalGeral());
+
+        return cv;
+
+    }
+
+}
